@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
-import Error from "./Error";
+import Error from "../UI/Error";
 
 const fileTypes = ["WAV"];
 
