@@ -1989,10 +1989,6 @@ html {
   text-decoration-line: underline;
 }
 
-.menu > :where(li.disabled > *:not(ul):focus) {
-  cursor: auto;
-}
-
 .modal {
   pointer-events: none;
   visibility: hidden;
@@ -2087,6 +2083,13 @@ html {
   place-items: center;
   text-align: center;
   min-width: 4rem;
+}
+
+.alert-success {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--su) / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(var(--suc, var(--nc)) / var(--tw-text-opacity));
 }
 
 .alert-error {
@@ -2260,18 +2263,6 @@ html {
   background-color: hsl(var(--af, var(--a)) / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: hsl(var(--ac) / var(--tw-text-opacity));
-}
-
-.btm-nav>*.disabled,
-    .btm-nav>*.disabled:hover,
-    .btm-nav>*[disabled],
-    .btm-nav>*[disabled]:hover {
-  pointer-events: none;
-  --tw-border-opacity: 0;
-  background-color: hsl(var(--n) / var(--tw-bg-opacity));
-  --tw-bg-opacity: 0.1;
-  color: hsl(var(--bc) / var(--tw-text-opacity));
-  --tw-text-opacity: 0.2;
 }
 
 .btm-nav>* .label {
@@ -2649,17 +2640,6 @@ html {
   outline-offset: 2px;
 }
 
-.menu li.disabled > * {
-  -webkit-user-select: none;
-          user-select: none;
-  color: hsl(var(--bc) / var(--tw-text-opacity));
-  --tw-text-opacity: 0.2;
-}
-
-.menu li.disabled > *:hover {
-  background-color: transparent;
-}
-
 .modal-open .modal-box,
 .modal-toggle:checked + .modal .modal-box,
 .modal:target .modal-box {
@@ -2890,8 +2870,22 @@ html {
   text-shadow: 0 1px rgb(0 0 0 / var(--glass-text-shadow-opacity, 5%));
 }
 
+.btn-sm {
+  height: 2rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  min-height: 2rem;
+  font-size: 0.875rem;
+}
+
 .btn-wide {
   width: 16rem;
+}
+
+.btn-square:where(.btn-sm) {
+  height: 2rem;
+  width: 2rem;
+  padding: 0px;
 }
 
 .btn-circle:where(.btn-xs) {
@@ -3061,6 +3055,10 @@ html {
   position: absolute;
 }
 
+.relative {
+  position: relative;
+}
+
 .left-0 {
   left: 0px;
 }
@@ -3069,8 +3067,16 @@ html {
   right: 0px;
 }
 
+.right-2 {
+  right: 0.5rem;
+}
+
 .top-0 {
   top: 0px;
+}
+
+.top-2 {
+  top: 0.5rem;
 }
 
 .mx-auto {
@@ -3087,28 +3093,12 @@ html {
   margin-bottom: 2rem;
 }
 
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.mb-12 {
-  margin-bottom: 3rem;
-}
-
-.mt-8 {
-  margin-top: 2rem;
-}
-
-.mt-4 {
-  margin-top: 1rem;
-}
-
 .mt-6 {
   margin-top: 1.5rem;
 }
 
-.block {
-  display: block;
+.mt-4 {
+  margin-top: 1rem;
 }
 
 .flex {
@@ -3163,10 +3153,6 @@ html {
   grid-auto-flow: column;
 }
 
-.flex-col {
-  flex-direction: column;
-}
-
 .items-center {
   align-items: center;
 }
@@ -3191,10 +3177,6 @@ html {
   gap: 1rem;
 }
 
-.self-center {
-  align-self: center;
-}
-
 .rounded {
   border-radius: 0.25rem;
 }
@@ -3215,16 +3197,6 @@ html {
   border-style: dashed;
 }
 
-.border-secondary {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--s) / var(--tw-border-opacity));
-}
-
-.border-primary {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--p) / var(--tw-border-opacity));
-}
-
 .bg-transparent {
   background-color: transparent;
 }
@@ -3232,10 +3204,6 @@ html {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-none {
-  background-image: none;
 }
 
 .fill-current {
@@ -3273,6 +3241,11 @@ html {
   text-align: center;
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
@@ -3288,11 +3261,6 @@ html {
   line-height: 1.75rem;
 }
 
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
 .font-bold {
   font-weight: 700;
 }
@@ -3300,11 +3268,6 @@ html {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .shadow-lg {
@@ -3351,11 +3314,6 @@ html {
 .hover\:bg-white:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.hover\:text-white:hover {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .hover\:text-secondary:hover {

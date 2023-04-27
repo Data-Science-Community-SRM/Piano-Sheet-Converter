@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import Uploader from '../UI/Uploader'
+import Uploader from './Uploader'
 import Progress from '../UI/Progress';
 
 const Form = () => {
@@ -9,11 +9,27 @@ const Form = () => {
   const submitHandler = async(e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false)
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const response = await fetch('http://localhost:5000/upload', {
+        method: 'POST',
+        body: formData
+      });
+      if(response.ok){
+        const data = await response.json();
+        console.log(data, response.status);
+      }
+      else throw Error('Something Went Wrong', response.status)
+    }
+    catch(error){
+      console.log(error);
+    }
+    finally{
       setFile(null)
-      document.getElementById('my-modal-5').checked = false;
-    }, 10000);
+      setLoading(false);
+      document.getElementById('my-modal-3').checked = false;
+    }
   }
 
   return (
@@ -21,10 +37,10 @@ const Form = () => {
       loading ? <Progress /> : 
       <>
         <h3 className="font-bold text-lg mb-8">Upload music file</h3>
-        <form action="" method="post" encType='multipart/form-data' onSubmit={submitHandler}>
+        <form method="post" encType='multipart/form-data' onSubmit={submitHandler}>
             <Uploader setFile={setFile} file={file}/>
             <div className={`modal-action ${file ? "":"hidden"}`}>
-                <label htmlFor="my-modal-5" className="text-xl btn btn-outline text-white hover:bg-white hover:text-secondary"><input type="submit" className='w-full h-full' value="Convert"/></label>
+                <label htmlFor="my-modal-3" className="text-xl btn btn-outline text-white hover:bg-white hover:text-secondary"><input type="submit" className='w-full h-full' value="Convert"/></label>
             </div>
         </form>
       </>
