@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Uploader from '../UI/Uploader'
+import Progress from '../UI/Progress';
 
 const Form = () => {
   const [file, setFile] = useState(null);
@@ -17,18 +18,13 @@ const Form = () => {
 
   return (
     <>{
-      loading ? 
-      <div className='mx-auto w-56'>
-        <h1 htmlFor="progress" className='text-2xl text-center'>Converting</h1>
-        <progress id='progress' className="mx-auto my-8 progress progress-secondary w-56 text-white bg-white"></progress>
-      </div>
-      : 
+      loading ? <Progress /> : 
       <>
         <h3 className="font-bold text-lg mb-8">Upload music file</h3>
         <form action="" method="post" encType='multipart/form-data' onSubmit={submitHandler}>
             <Uploader setFile={setFile} file={file}/>
-            <div className="modal-action">
-                <label htmlFor="my-modal-5" className="text-xl btn btn-outline text-white hover:bg-white hover:text-secondary"><input type="submit" value="Convert" /></label>
+            <div className={`modal-action ${file ? "":"hidden"}`}>
+                <label htmlFor="my-modal-5" className="text-xl btn btn-outline text-white hover:bg-white hover:text-secondary"><input type="submit" className='w-full h-full' value="Convert"/></label>
             </div>
         </form>
       </>
